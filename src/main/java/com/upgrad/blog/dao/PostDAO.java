@@ -50,20 +50,22 @@ public class PostDAO  implements PostsCRUD {
 
     public List<PostDTO> findByEmail(String emailId) throws SQLException{
        List<PostDTO> postDTO=new ArrayList<>();
-
-        String query = "select * from POSTS where email_id= ?";
+       String query = "select * from POSTS where email_id= ?";
         PreparedStatement  stm = con.prepareStatement(query);
         stm.setString(1,emailId );
         PostDTO postDT=new PostDTO();
 
         ResultSet resultSet = stm.executeQuery();
+
+
         if(resultSet.next()) {
+
                 postDT.setPostId(resultSet.getInt(1));
                 postDT.setEmailId(resultSet.getString(2));
                 postDT.setTitle(resultSet.getString(3));
                 postDT.setDescription(resultSet.getString(4));
                 postDT.setTag(resultSet.getString(5));
-
+                postDTO.add(postDT);
 
         }
 
@@ -106,6 +108,7 @@ public class PostDAO  implements PostsCRUD {
                 postDT.setTitle(resultSet.getString(3));
                 postDT.setDescription(resultSet.getString(4));
                 postDT.setTag(resultSet.getString(5));
+                postDTO.add(postDT);
 
         }
 
