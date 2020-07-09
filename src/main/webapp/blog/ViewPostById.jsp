@@ -1,6 +1,7 @@
 <!-- **********************DONE******************* -->
 <%@ page import="com.upgrad.blog.dto.PostDTO" %>
 <%@ page import="com.upgrad.blog.util.DateTimeFormatter" %>
+<%@ page import="java.time.LocalDateTime" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%
     /*If user tries to click on browser bac k button then he/ she should not be able to access this page*/
@@ -14,8 +15,6 @@
 	* (Hint: You need to handle NullPointerException.)
 	* (Hint: Make use of the email id stored in the session object to check if user is logged in or not.)
     */
-
-
 
 
        try{
@@ -73,6 +72,9 @@
                out.println( "Tag: "+request.getParameter("tag")+"\n");
                out.newLine();
                out.println( "Description: "+request.getParameter("description"));
+               out.newLine();
+               DateTimeFormatter formatter=new DateTimeFormatter();
+               out.println( "Time: "+formatter.format(LocalDateTime.now()));
                }
                catch(NullPointerException ne){
                }
