@@ -49,7 +49,7 @@
 	-->
     <%--    Showing text before @ in email as username--%>
 
-       try{
+  <%     try{
             if(session.getAttribute("emailId")!=null){
                 String[] arr= session.getAttribute("emailId").toString().split("@");
                 out.println("Logged In as "+arr[0]);
@@ -57,7 +57,7 @@
                }
            catch(NullPointerException e){
            }
-
+%>
 
 
 </header>
@@ -87,12 +87,12 @@
 /*
 * Add the missing line of code here
 */
-               postDTOS = daoFactory.getPostsCRUDS().findByEmail(emailId);
+               DAOFactory daoFactory = new DAOFactory();
+               postDTOS = daoFactory.getPostsCRUDS().findByEmail(request.getParameter("emailId"));
                for(PostDTO postDTO:postDTOS) {
                   if (postDTO.getEmailId().equals(null)) {
                   request.setAttribute("isError", true);
-                  request.setAttribute("error", "Sorry no posts exists for this email id");
-
+                  throw new PostNotFoundException("Sorry no posts exists for this email id");
 				}
 				}
 				}catch (PostNotFoundException e) {//uncomment this line
