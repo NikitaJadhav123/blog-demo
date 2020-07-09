@@ -108,16 +108,22 @@ public class UserServlet extends HttpServlet  {
                     req.setAttribute("errorMessage", "No user registered with the given email address!");
                     rd = req.getRequestDispatcher("/index.jsp");
                     rd.forward(req, resp);
-                }
-                else if (userDTO.getPassword().equals(password)) {
+                } else if (userDTO.getPassword().equals(password)) {
                     // Set session variable to check if user is loggedin
                     httpSession.setAttribute("emailId", emailId);
-                //    resp.sendRedirect(req.getContextPath() + "/Home.jsp");
+                    //    resp.sendRedirect(req.getContextPath() + "/Home.jsp");
                 } else {
-                    req.setAttribute("isError", true);
-                    req.setAttribute("errorMessage", "Please enter valid credentials");
-                    rd = req.getRequestDispatcher("/index.jsp");
-                    rd.forward(req, resp);
+                    EmailValidator emailValidator = new EmailValidator();
+                    try {
+                        if (emailValidator.isValidEmail(emailId)) {
+                            req.setAttribute("isError", true);
+                            req.setAttribute("errorMessage", "Please enter valid credentials");
+                            rd = req.getRequestDispatcher("/index.jsp");
+                            rd.forward(req, resp);
+                        }
+                    } catch (EmailNotValidException e) {
+                        e.printStackTrace();
+                    }
                 }
             }
            catch (SQLException e) {
