@@ -78,7 +78,7 @@
 
             DAOFactory daoFactory = new DAOFactory();
             PostDTO post=new PostDTO();
-            isDeleted=daoFactory.getPostsCRUDS().deleteById(post.getPostId(), request.getParameter("emailId"));
+            isDeleted=daoFactory.getPostsCRUDS().deleteById(Integer.parseInt(request.getParameter("postId")), request.getParameter("emailId"));
 
             if(isDeleted) {%>
                 <script type="text/javascript">alert("Post deleted successfully!")</script>
