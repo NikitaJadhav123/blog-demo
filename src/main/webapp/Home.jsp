@@ -62,7 +62,7 @@
 <a href="Search.jsp"> Search Post</a>
 <a href="Delete.jsp">Delete Post</a>
 <a href="Filter.jsp">Filter Post</a>
-<a href="Logout.jsp">Logout</a>
+<a href="/Logout.jsp">Logout</a>
 
 </body>
 </html>
