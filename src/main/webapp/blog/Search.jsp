@@ -22,7 +22,7 @@
 
        try{
 	      if(session.getAttribute("emailId")==null){
-             RequestDispatcher rd=request.getRequestDispatcher("/Home.jsp");
+             RequestDispatcher rd=request.getRequestDispatcher("/index.jsp");
              rd.forward(request, response);
             }
         }
@@ -119,7 +119,7 @@
 <!-- 
 	Insert your code here.
 -->
-           out.println(postDTOS.get(i).toString());
+          <%  out.println(postDTOS.get(i).toString()); %>
 
     </div>
     <%
