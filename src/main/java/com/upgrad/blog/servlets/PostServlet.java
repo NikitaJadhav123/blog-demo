@@ -127,6 +127,7 @@ public class PostServlet extends HttpServlet {
                 httpSession.setAttribute("data",postDTOnew);
                 httpSession.setAttribute("emailId", emailId);
 
+
                 } catch (SQLException e) {
                     req.setAttribute("isError", true);
                     req.setAttribute("errorMessage", "Some unexpected error occurred!");

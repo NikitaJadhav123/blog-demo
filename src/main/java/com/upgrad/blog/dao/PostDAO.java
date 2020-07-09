@@ -54,18 +54,16 @@ public class PostDAO  implements PostsCRUD {
         String query = "select * from POSTS where email_id= ?";
         PreparedStatement  stm = con.prepareStatement(query);
         stm.setString(1,emailId );
-
+        PostDTO postDT=new PostDTO();
 
         ResultSet resultSet = stm.executeQuery();
         if(resultSet.next()) {
-
-            for(PostDTO postDT:postDTO) {
                 postDT.setPostId(resultSet.getInt(1));
                 postDT.setEmailId(resultSet.getString(2));
                 postDT.setTitle(resultSet.getString(3));
                 postDT.setDescription(resultSet.getString(4));
                 postDT.setTag(resultSet.getString(5));
-            }
+
 
         }
 
@@ -78,7 +76,7 @@ public class PostDAO  implements PostsCRUD {
 
         PreparedStatement ps=con.prepareStatement("delete from POSTS where id=? and email_id=?");
         ps.setInt(1, id);
-         ps.setString(2,emailId);
+        ps.setString(2,emailId);
 
         int i=ps.executeUpdate();
         if(i==0)
@@ -99,18 +97,15 @@ public class PostDAO  implements PostsCRUD {
         String query = "select * from POSTS where tag= ?";
         PreparedStatement  stm = con.prepareStatement(query);
         stm.setString(1, tag);
-
+        PostDTO postDT=new PostDTO();
 
         ResultSet resultSet = stm.executeQuery();
         if(resultSet.next()) {
-
-            for(PostDTO postDT:postDTO) {
                 postDT.setPostId(resultSet.getInt(1));
                 postDT.setEmailId(resultSet.getString(2));
                 postDT.setTitle(resultSet.getString(3));
                 postDT.setDescription(resultSet.getString(4));
                 postDT.setTag(resultSet.getString(5));
-            }
 
         }
 

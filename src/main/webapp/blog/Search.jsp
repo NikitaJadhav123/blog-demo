@@ -51,7 +51,8 @@
 
   <%     try{
             if(session.getAttribute("emailId")!=null){
-                String[] arr= session.getAttribute("emailId").toString().split("@");
+                Object obj=session.getAttribute("emailId");
+                String[] arr= obj.toString().split("@");
                 out.println("Logged In as "+arr[0]);
                }
                }
@@ -88,12 +89,10 @@
 * Add the missing line of code here
 */
                DAOFactory daoFactory = new DAOFactory();
-               postDTOS = daoFactory.getPostsCRUDS().findByEmail(request.getParameter("emailId"));
-               for(PostDTO postDTO:postDTOS) {
-                  if (postDTO.getEmailId().equals(null)) {
+               postDTOS = daoFactory.getPostsCRUDS().findByEmail((String)session.getAttribute("emailId"));
+              if (postDTOS==null) {
                   request.setAttribute("isError", true);
                   throw new PostNotFoundException("Sorry no posts exists for this email id");
-				}
 				}
 				}catch (PostNotFoundException e) {//uncomment this line
                     %>

@@ -14,14 +14,15 @@
 
 
        try{
-    	      if(session.getAttribute("emailId")==null){
+    	   if(session.getAttribute("emailId")==null){
                  RequestDispatcher rd=request.getRequestDispatcher("/Index.jsp");
 
-                       rd.forward(request, response);
-                }
-                }
-                  catch(NullPointerException e){
-                                 }
+                 rd.forward(request, response);
+              }
+           }
+           catch(NullPointerException e){
+            e.printStackTrace();
+            }
 
 
 
@@ -50,7 +51,8 @@
     <%
      try{
     	      if(session.getAttribute("emailId")!=null){
-    	        String[] arr= session.getAttribute("emailId").toString().split("@");
+    	        Object obj=session.getAttribute("emailId");
+    	        String[] arr= obj.toString().split("@");
                 out.println("Logged In as "+arr[0]);
                 }
                 }

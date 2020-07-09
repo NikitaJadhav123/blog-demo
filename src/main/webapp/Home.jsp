@@ -43,7 +43,8 @@
 <%
        try{
 	      if(session.getAttribute("emailId")!=null){
-             String[] arr= session.getAttribute("emailId").toString().split("@");
+	         Object obj=session.getAttribute("emailId");
+             String[] arr= obj.toString().split("@");
              out.println("Logged In as "+arr[0]);
             }
             }

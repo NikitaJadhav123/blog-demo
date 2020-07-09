@@ -19,6 +19,18 @@
 	* (Hint: You need to handle NullPointerException.)
 	* (Hint: Make use of the email id stored in the session object to check if user is logged in or not.)
     */
+     try{
+    	  if(session.getAttribute("emailId")==null){
+                 RequestDispatcher rd=request.getRequestDispatcher("/index.jsp");
+                 rd.forward(request, response);
+                }
+       }
+        catch(NullPointerException e)
+         {
+           e.printStackTrace();
+         }
+
+
 
 %>
 <html>
@@ -35,6 +47,15 @@
 		in the top right corner of the web page. 
 	-->
     <%--    Showing text before @ in email as username--%>
+      <%     try{
+                if(session.getAttribute("emailId")!=null){
+                    String[] arr= session.getAttribute("emailId").toString().split("@");
+                    out.println("Logged In as "+arr[0]);
+                   }
+                   }
+               catch(NullPointerException e){
+               }
+    %>
 
 </header>
 <div id="form_wrapper">
