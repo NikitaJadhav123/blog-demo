@@ -46,7 +46,8 @@
         <%
          try{
         	      if(session.getAttribute("emailId")!=null){
-                    out.println("Logged In as "+session.getAttribute("emailId"));
+                     String[] arr= session.getAttribute("emailId").toString().split("@");
+                     out.println("Logged In as "+arr[0]);
                     }
                     }
                       catch(NullPointerException e){
@@ -63,25 +64,20 @@
 
 <form>
 
-
-        <%-- Arranging data in tabular form
-        --%>
-
-            <tr>
-                <td><%
+<%
                try{
-               out.println( "Email: "+request.getParameter("emailId"));
-               out.println( "Title: "+request.getParameter("title"));
-               out.println( "Tag: "+request.getParameter("tag"));
+               out.println( "Email: "+session.getAttribute("emailId")+"\n");
+               out.newLine();
+               out.println( "Title: "+request.getParameter("title")+"\n");
+               out.newLine();
+               out.println( "Tag: "+request.getParameter("tag")+"\n");
+               out.newLine();
                out.println( "Description: "+request.getParameter("description"));
-               out.println("Time: "+LocalDataTime.now());
                }
                catch(NullPointerException ne){
                }
 
-               %></td>
-
-            </tr>
+               %>
 
 
 

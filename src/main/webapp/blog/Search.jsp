@@ -20,6 +20,19 @@
 	* (Hint: Make use of the email id stored in the session object to check if user is logged in or not.)
     */
 
+       try{
+	      if(session.getAttribute("emailId")==null){
+             RequestDispatcher rd=request.getRequestDispatcher("/Home.jsp");
+             rd.forward(request, response);
+            }
+        }
+        catch(NullPointerException e)
+            {
+                 e.printStackTrace();
+           }
+
+
+
 %>
 <html>
 <head>
@@ -35,6 +48,17 @@
 		in the top right corner of the web page. 
 	-->
     <%--    Showing text before @ in email as username--%>
+
+       try{
+            if(session.getAttribute("emailId")!=null){
+                String[] arr= session.getAttribute("emailId").toString().split("@");
+                out.println("Logged In as "+arr[0]);
+               }
+               }
+           catch(NullPointerException e){
+           }
+
+
 
 </header>
 <div id="form_wrapper">
@@ -59,17 +83,26 @@
                 List<PostDTO> postDTOS = null;
                 if (request.getMethod().equals("POST")) {
 
-				//try {//uncomment this line
+				try {//uncomment this line
 /*
 * Add the missing line of code here
 */
+               postDTOS = daoFactory.getPostsCRUDS().findByEmail(emailId);
+               for(PostDTO postDTO:postDTOS) {
+                  if (postDTO.getEmailId().equals(null)) {
+                  request.setAttribute("isError", true);
+                  request.setAttribute("error", "Sorry no posts exists for this email id");
 
-				//} catch (PostNotFoundException e) {//uncomment this line
+				}
+				}
+				}catch (PostNotFoundException e) {//uncomment this line
                     %>
-            <!--<div class="error"><%=e.getMessage()%>//uncomment this line-->
-            <!--</div>//uncomment this line-->
+            <div class="error"><%=e.getMessage()%>//uncomment this line
+            </div>//uncomment this line
             <%
-                } //}//uncomment the second brances
+                }
+
+                }//uncomment the second brances
             %>
         </div>
     </form>
@@ -86,6 +119,7 @@
 <!-- 
 	Insert your code here.
 -->
+           out.println(postDTOS.get(i).toString());
 
     </div>
     <%

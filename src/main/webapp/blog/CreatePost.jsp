@@ -50,7 +50,8 @@
     <%
      try{
     	      if(session.getAttribute("emailId")!=null){
-                out.println("Logged In as "+session.getAttribute("emailId"));
+    	        String[] arr= session.getAttribute("emailId").toString().split("@");
+                out.println("Logged In as "+arr[0]);
                 }
                 }
                   catch(NullPointerException e){

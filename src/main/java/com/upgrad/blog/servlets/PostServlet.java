@@ -122,34 +122,20 @@ public class PostServlet extends HttpServlet {
             postDTOnew.setTag(tag);
             postDTOnew.setTimestamp(localDateTime);
             //if (httpSession.getAttribute("emailId").equals(emailId)) {
-                try {
-             /*   List<PostDTO> postDTOS = daoFactory.getPostsCRUDS().findByEmail(emailId);
-                for(PostDTO postDTO:postDTOS) {
-                    if (postDTO.getEmailId() == null) {
-                        req.setAttribute("isError", true);
-                        req.setAttribute("errorMessage", "No user posted with the given email address!");
-                        rd = req.getRequestDispatcher("/index.jsp");
-                        rd.forward(req, resp);
-                    }
-                }
-
-               */
-
-                    daoFactory.getPostsCRUDS().create(postDTOnew);
-                    httpSession.setAttribute("data",postDTOnew);
-                      httpSession.setAttribute("emailId", emailId);
+            try {
+                daoFactory.getPostsCRUDS().create(postDTOnew);
+                httpSession.setAttribute("data",postDTOnew);
+                httpSession.setAttribute("emailId", emailId);
 
                 } catch (SQLException e) {
                     req.setAttribute("isError", true);
-                    req.setAttribute("errorMessage", "Some unexpected error occured!");
+                    req.setAttribute("errorMessage", "Some unexpected error occurred!");
                     rd = req.getRequestDispatcher("/CreatePost.jsp");
                     rd.forward(req, resp);
 
                 }
-
-
-
         }
+
         try {
             if (httpSession.getAttribute("emailId").equals(emailId)) {
                 rd = req.getRequestDispatcher("/ViewPostById.jsp");
@@ -158,12 +144,6 @@ public class PostServlet extends HttpServlet {
         } catch (NullPointerException e) {
             // Means user is not Signed in and can access the servlet
         }
-
-
-
-
-
-
 
 
 

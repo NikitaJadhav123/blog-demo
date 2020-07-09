@@ -14,12 +14,13 @@
        try{
 	      if(session.getAttribute("emailId")!=null){
              RequestDispatcher rd=request.getRequestDispatcher("/Home.jsp");
-
-                   rd.forward(request, response);
+             rd.forward(request, response);
             }
             }
-              catch(NullPointerException e){
-                             }
+            catch(NullPointerException e)
+            {
+            e.printStackTrace();
+           }
 
 
 
