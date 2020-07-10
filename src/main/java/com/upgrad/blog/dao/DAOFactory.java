@@ -15,12 +15,13 @@ import java.awt.*;
 public class DAOFactory {
 
 
-
+    //By calling this method USERS database queries can be invoked
     public  UserCRUD getUserCRUDS() {
 
         return new UserDAO();
     }
 
+     //By calling this method POSTS database queries can be invoked
     public PostsCRUD getPostsCRUDS() {
 
         return new PostDAO();
